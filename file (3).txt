@@ -1,0 +1,14 @@
+- Fully typed TypeScript throughout  
+- Role‑based auth (JWT + bcrypt)  
+- Barcode scanning (QuaggaJS)  
+- Progressive Web App: installable on Android/iOS  
+- Docker + cloud‑database ready  
+
+---
+
+## 🚀 Quick Start (Local)
+
+1. **Clone repository**
+   ```bash
+   git clone [github.com](https://github.com/YOURNAME/workorderpro.git)
+   cd workorderpro

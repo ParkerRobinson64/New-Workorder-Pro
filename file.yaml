@@ -1,0 +1,45 @@
+version: "3.9"
+
+services:
+  database:
+    image: postgres:16
+    container_name: workorderpro_db
+    environment:
+      POSTGRES_DB: workorderpro
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  backend:
+    build: ./backend
+    container_name: workorderpro_backend
+    command: npm run dev
+    environment:
+      DATABASE_URL: postgres://postgres:postgres@database:5432/workorderpro
+      PORT: 4000
+      JWT_SECRET: changeMeNow
+    ports:
+      - "4000:4000"
+    depends_on:
+      - database
+    volumes:
+      - ./backend:/app
+
+  frontend:
+    build: ./frontend
+    container_name: workorderpro_frontend
+    command: npm run dev
+    environment:
+      VITE_API_URL: [localhost](http://localhost:4000/api)
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/app
+
+volumes:
+  db_data:
